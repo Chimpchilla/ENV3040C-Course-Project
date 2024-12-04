@@ -1,0 +1,29 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import statistics
+from scipy import stats
+
+per=stats.pearsonr(Cd,Zn)
+percz=round(per.statistic, 3)
+spe=stats.spearmanr(Cd,Zn)
+specz=round(spe.statistic, 3)
+print("Pearson Coefficient=" + str(percz) + " Spearman Coefficient=" + str(specz))
+
+lin=stats.linregress(Cd, Zn)
+nil=stats.linregress(Zn, Cd)
+print(lin)
+print(nil)
+
+fig, ax = plt.subplots()
+ax.scatter(yeez,Cd)
+ax.plot([2012,2023], [2.010, 2.011], c="red")
+ax.set_xlabel("Year")
+ax.set_ylabel("Concentration (mg/L)")
+plt.title("Cadmium")
+
+fig, ax = plt.subplots()
+ax.scatter(yeez,Zn)
+ax.plot([2012,2023], [581.718, 597], c="blue")
+ax.set_xlabel("Year")
+ax.set_ylabel("Concentration (mg/L)")
+plt.title("Zinc")
