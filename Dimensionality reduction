@@ -1,0 +1,55 @@
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+import statistics
+from scipy import stats
+from sklearn.decomposition import PCA
+
+file=open(input())
+line=file.readline()
+quan=[]
+
+for line in file:
+    data=line.split("\t")
+    out=[]
+    for i in data[2:]:
+        out.append(float(i))
+    quan.append(out)
+
+rata=np.array(quan)
+rataTP=np.transpose(rata)
+pca=PCA(n_components=8)
+principal_components=pca.fit_transform(rataTP)
+weights=pca.explained_variance_ratio_
+print(principal_components)
+print(weights)
+
+names=["PC1", "PC2", "PC3", "PC4", "PC5", "PC6", "PC7", "PC8"]
+plt.bar(names, weights)
+plt.title("PC Weight")
+plt.show()
+
+fig, ax = plt.subplots()
+PC1=0
+PC2=1
+ax.scatter(principal_components[PC1, 0], principal_components[PC2, 0], c="black")
+ax.scatter(principal_components[PC1, 1], principal_components[PC2, 1], c="black")
+ax.scatter(principal_components[PC1, 2], principal_components[PC2, 2], c="black")
+ax.scatter(principal_components[PC1, 3], principal_components[PC2, 3], c="black")
+ax.scatter(principal_components[PC1, 4], principal_components[PC2, 4], c="orange")
+ax.scatter(principal_components[PC1, 5], principal_components[PC2, 5], c="red")
+ax.scatter(principal_components[PC1, 6], principal_components[PC2, 6], c="black")
+ax.scatter(principal_components[PC1, 7], principal_components[PC2, 7], c="black")
+ax.set_xlabel("PC1")
+ax.set_ylabel("PC2")
+
+fig, ax = plt.subplots()
+ax.scatter(principal_components[PC1, 1], principal_components[PC2, 1], c="black")
+ax.scatter(principal_components[PC1, 2], principal_components[PC2, 2], c="black")
+ax.scatter(principal_components[PC1, 3], principal_components[PC2, 3], c="black")
+ax.scatter(principal_components[PC1, 4], principal_components[PC2, 4], c="orange")
+ax.scatter(principal_components[PC1, 5], principal_components[PC2, 5], c="red")
+ax.scatter(principal_components[PC1, 6], principal_components[PC2, 6], c="black")
+ax.scatter(principal_components[PC1, 7], principal_components[PC2, 7], c="black")
+ax.set_xlabel("PC1")
+ax.set_ylabel("PC2")
