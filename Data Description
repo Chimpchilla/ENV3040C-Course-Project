@@ -1,0 +1,36 @@
+import sys
+import numpy as np
+import matplotlib.pyplot as plt
+import statistics
+from scipy import stats
+
+file=open(input())
+Cd=[]
+Zn=[]
+yeez=[]
+counter=0
+line=file.readline()
+for line in file:
+    if counter < 18:
+        data=line.split("\t")
+        Cd.append(float(data[6]))
+        Zn.append(float(data[7]))
+        yeez.append(int(data[1]))
+        counter=counter+1
+
+meanc=statistics.mean(Cd)
+medianc=statistics.median(Cd)
+stdevc=statistics.stdev(Cd)
+meanz=statistics.mean(Zn)
+medianz=statistics.median(Zn)
+stdevz=statistics.stdev(Zn)
+
+print("Cadmium (Cd) statistics: " + "Mean=" + str(round(meanc,2)) + " Median=" + str(medianc) + " Standard Deviation=" + str(round(stdevc,2)))
+print("Zinc (Zn) statistics: " + "Mean=" + str(round(meanz,2)) + " Median=" + str(medianz) + " Standard Deviation=" + str(round(stdevz,2)))
+
+plt.hist(Cd, bins="auto")
+plt.title("Histogram of Cadmium Accumulation (mg/L) in Berkeley Pit, Butte, MT")
+plt.show()
+plt.hist(Zn, bins="auto")
+plt.title("Histogram of Zinc Accumulation (mg/L) in Berkeley Pit, Butte, MT")
+plt.show()
